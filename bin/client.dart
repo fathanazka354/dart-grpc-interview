@@ -21,12 +21,12 @@ class Client {
     while (executionInProgress) {
       try {
         print('---- Welcome to the dart store API ---');
-        print('   ---- what do you want to do ---');
-        print('👉 1: Liat semua hewan/benda/buah');
-        print('👉 2: Tambah hewan/benda/buah baru');
-        print('👉 3: Update hewan/benda/buah');
-        print('👉 4: Mendapatkan hewan/benda/buah berdasarkan nama');
-        print('👉 5: Hapus hewan/benda/buah \n');
+        print('   ---- Apa yang akan kalian lakukan ---');
+        print('👉 1: Liat semua produk');
+        print('👉 2: Tambah produk baru');
+        print('👉 3: Update produk');
+        print('👉 4: Mendapatkan produk berdasarkan nama');
+        print('👉 5: Hapus produk \n');
         print('👉 6: Liat semua kategori');
         print('👉 7: Tambah kategori baru');
         print('👉 8: Update kategory');
@@ -46,12 +46,11 @@ class Client {
             });
             break;
           case 2:
-            print('Masukkan nama barang/hewan/benda');
+            print('Masukkan nama produk');
             var name = stdin.readLineSync();
             var item = await _findItemByName(name);
             if (item.id != 0) {
-              print(
-                  '🔴 product already exists: name ${item.name} | id: ${item.id} ');
+              print('🔴 produk sudah ada: name ${item.name} | id: ${item.id} ');
             } else {
               print('Enter product\'s category name');
               var categoryName = stdin.readLineSync();
@@ -66,14 +65,14 @@ class Client {
                   ..categoryId = category.id;
                 response = await stub.createItem(item);
                 print(
-                    '✅ product created | name ${response.name} | id ${response.id} | category id ${response.categoryId}');
+                    '✅ produk berhasil dibuat | name ${response.name} | id ${response.id} | category id ${response.categoryId}');
               }
             }
 
             break;
 
           case 3:
-            print('Masukkan nama barang/hewan/benda');
+            print('Enter product name');
             var name = stdin.readLineSync();
             var item = await _findItemByName(name);
             if (item.id != 0) {
@@ -92,38 +91,39 @@ class Client {
             }
             break;
           case 4:
-            print('Masukkan nama barang/hewan/benda');
+            print('Masukkan nama produk');
             var name = stdin.readLineSync();
             var item = await _findItemByName(name);
             if (item.id != 0) {
               print(
-                  '✅ product found | name ${item.name} | id ${item.id} | category id ${item.categoryId}');
+                  '✅ produk ditemukan | name ${item.name} | id ${item.id} | category id ${item.categoryId}');
             } else {
-              print('🔴 product not found | no product matches the name $name');
+              print(
+                  '🔴 produk tidak ditemukan | no product matches the name $name');
             }
             break;
           case 5:
-            print('Masukkan nama barang/hewan/benda');
+            print('Masukkan nama produk');
             var name = stdin.readLineSync();
             var item = await _findItemByName(name);
             if (item.id != 0) {
               await stub.deleteItem(item);
-              print('✅ item deleted');
+              print('✅ produk terhapus');
             } else {
-              print('🔴 product $name does not exist ');
+              print('🔴 produk $name tidak ada ');
             }
 
             break;
           case 6:
             response = await stub.getAllCategories(Empty());
-            print(' --- Store product categories --- ');
+            print(' --- Daftar Kategori --- ');
             response.categories.forEach((category) {
               print('👉: ${category.name} (id: ${category.id})');
             });
 
             break;
           case 7:
-            print('Enter category name');
+            print('Masukkan nama kategory');
             var name = stdin.readLineSync();
             var category = await _findCategoryByName(name);
             if (category.id != 0) {
@@ -139,7 +139,7 @@ class Client {
             }
             break;
           case 8:
-            print('Enter category name');
+            print('Masukkan nama kategory');
             var name = stdin.readLineSync();
             var category = await _findCategoryByName(name);
             if (category.id != 0) {
@@ -159,7 +159,7 @@ class Client {
 
             break;
           case 9:
-            print('Enter category name');
+            print('Masukkan nama kategory');
             var name = stdin.readLineSync();
             var category = await _findCategoryByName(name);
             if (category.id != 0) {
@@ -172,7 +172,7 @@ class Client {
 
             break;
           case 10:
-            print('Enter category name');
+            print('Masukkan nama kategory');
             var name = stdin.readLineSync();
             var category = await _findCategoryByName(name);
             if (category.id != 0) {
@@ -183,7 +183,7 @@ class Client {
             }
             break;
           case 11:
-            print('Enter category name');
+            print('Masukkan nama kategory');
             var name = stdin.readLineSync();
             var category = await _findCategoryByName(name);
             if (category.id != 0) {
